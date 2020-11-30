@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Interfaces\ICurrencyRateService.cs" />
+    <Compile Remove="Services\CurrencyRateService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MoneyExchangerApp.Domain\MoneyExchangerApp.Domain.csproj" />
+    <ProjectReference Include="..\MoneyExchangerApp.Repositories\MoneyExchangerApp.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>
