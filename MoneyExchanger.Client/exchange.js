@@ -4,17 +4,17 @@ const BASE_URL = "https://localhost:44302/api"
 let focusId = null;
 
 document.getElementById("fromAmountId").onfocus = function() {
-    focusId = "fromAmountId"
+    focusId = "fromAmountId";
 }
 
 document.getElementById("toAmountId").onfocus = function() {
-    focusId = "toAmountId"
+    focusId = "toAmountId";
 }
 
 document.getElementById("btn-exchange").onclick = exchange;
 
 function getCurrency(from, amount, to){
-    return fetch(`${BASE_URL}/Exchange/${from}/${amount}/${to}`, {method: "POST"}).then(res => res.text())
+    return fetch(`${BASE_URL}/Exchange/${from}/${amount}/${to}`, {method: "POST"}).then(res => res.text());
 }
 
 function exchange(){
@@ -23,29 +23,40 @@ function exchange(){
     if(focusId == null)
         return;
 
-    let fromCurrency = null;
-    let toCurrency = null;
+    let fromCurrency = document.getElementById("fromCurrencyId").value;
+    let toCurrency = document.getElementById("toCurrencyId").value;
+    let fromAmount = document.getElementById("fromAmountId").value;
+    let toAmount = document.getElementById("toAmountId").value;
 
-    let focusEl = document.getElementById(focusId);
-
-    let amount = focusEl.value;
-    
-    if(amount === "") {
-        alert("idi nax")
+    if(fromAmount !== "" && toAmount === "") {
+        resultElemId = "toAmountId";
+    }
+    else if(fromAmount === "" && toAmount !== ""){
+        fromCurrency = document.getElementById("toCurrencyId").value;
+        toCurrency = document.getElementById("fromCurrencyId").value;
+        fromAmount = toAmount;
+        resultElemId = "fromAmountId";
+    }
+    else if(fromAmount !== "" && toAmount !== ""){
+        if(focusId === "fromAmountId"){
+            resultElemId = "toAmountId";
+        }
+        else if(focusId === "toAmountId"){
+            fromCurrency = document.getElementById("toCurrencyId").value;
+            toCurrency = document.getElementById("fromCurrencyId").value;
+            fromAmount = toAmount;
+            resultElemId = "fromAmountId";
+        }
+    }
+    else if(fromAmount === "" && toAmount === "") {
+        alert("input value in the field")
         return;
     }
 
-    if(focusId === "fromAmountId") {
-        fromCurrency = document.getElementById("fromCurrencyId").value
-        toCurrency = document.getElementById("toCurrencyId").value
-        resultElemId = "toAmountId";
-    }
-    else {
-        fromCurrency = document.getElementById("toCurrencyId").value
-        toCurrency = document.getElementById("fromCurrencyId").value
-        resultElemId = "fromAmountId"
-    }
-
     let result = document.getElementById(resultElemId);
-    getCurrency(fromCurrency, amount, toCurrency).then(res => result.value = res)
-}
+    getCurrency(fromCurrency, fromAmount, toCurrency).then(res => {
+        result.value = res;
+        return res
+    }).then(res => document
+                    .getElementById("oneCost").textContent = `${fromCurrency} 1 = ${toCurrency} ${(parseFloat(res)/parseFloat(fromAmount)).toFixed(4)}`)};
+    
