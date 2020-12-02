@@ -13,6 +13,8 @@ document.getElementById("toAmountId").onfocus = function() {
 
 document.getElementById("btn-exchange").onclick = exchange;
 
+document.getElementById("bth-swap").onclick = swapCurrencies;
+
 function getCurrency(from, amount, to){
     return fetch(`${BASE_URL}/Exchange/${from}/${amount}/${to}`, {method: "POST"}).then(res => res.text());
 }
@@ -55,5 +57,20 @@ function exchange(){
     getCurrency(fromCurrency, fromAmount, toCurrency).then(res => {
         result.value = res;
         return res}).then(res => document
-                    .getElementById("oneCost").textContent = `${fromCurrency} 1 = ${toCurrency} ${(parseFloat(res)/parseFloat(fromAmount)).toFixed(4)}`)};
+                    .getElementById("oneCost").textContent = `${fromCurrency} 1 = ${toCurrency} ${(parseFloat(res)/parseFloat(fromAmount)).toFixed(4)}`)
+                
+}
     
+function swapCurrencies(){
+    let fromCurrency = document.getElementById("fromCurrencyId").value;
+    let toCurrency = document.getElementById("toCurrencyId").value;
+
+    let temp = fromCurrency;
+    fromCurrency = toCurrency;
+    toCurrency = temp;
+    
+    document.getElementById("fromCurrencyId").value = fromCurrency;
+    document.getElementById("toCurrencyId").value = toCurrency;
+    
+    return;
+}

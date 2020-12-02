@@ -18,13 +18,23 @@
     justify-content: center;
 }
 
-.left-inputs{
-    margin: 25px;
-}
+.left-inputs,
 .right-inputs{
     margin: 25px;
 }
+
+.swap-div{
+    margin: 25px;
+}
+
 .lower-row{
     display: flex;
     justify-content: center;
 }   
+
+.swap-btn{
+    padding: 0;
+    height: 36px;
+    width:  47px;
+    background-image: url(swap_btn.png);
+}
