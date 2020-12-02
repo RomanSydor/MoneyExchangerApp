@@ -1,8 +1,10 @@
-header{
+.header{
     background-color: black;
     margin: 0;
     padding: 20px;
     width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .body{

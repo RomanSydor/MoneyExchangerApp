@@ -22,5 +22,13 @@ namespace MoneyExchangerApp.Api.Controllers
 
             return Ok(calculatedRate);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetExchanges() 
+        {
+            var exchanges = await _exchangeService.GetExchangeEntitiesAsync();
+
+            return Ok(exchanges);
+        }
     }
 }

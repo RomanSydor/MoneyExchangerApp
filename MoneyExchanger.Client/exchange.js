@@ -20,9 +20,11 @@ function getCurrency(from, amount, to){
 function exchange(){
     let resultElemId;
 
-    if(focusId == null)
+    if(focusId == null){
+        alert("Input value in the field");
         return;
-
+    }
+    
     let fromCurrency = document.getElementById("fromCurrencyId").value;
     let toCurrency = document.getElementById("toCurrencyId").value;
     let fromAmount = document.getElementById("fromAmountId").value;
@@ -48,15 +50,10 @@ function exchange(){
             resultElemId = "fromAmountId";
         }
     }
-    else if(fromAmount === "" && toAmount === "") {
-        alert("input value in the field")
-        return;
-    }
 
     let result = document.getElementById(resultElemId);
     getCurrency(fromCurrency, fromAmount, toCurrency).then(res => {
         result.value = res;
-        return res
-    }).then(res => document
+        return res}).then(res => document
                     .getElementById("oneCost").textContent = `${fromCurrency} 1 = ${toCurrency} ${(parseFloat(res)/parseFloat(fromAmount)).toFixed(4)}`)};
     

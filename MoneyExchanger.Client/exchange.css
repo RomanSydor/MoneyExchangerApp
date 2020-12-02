@@ -3,11 +3,28 @@
 }
 
 .exchange-btn{
-    margin-top: 10px;
-    margin-right: 40px;
+    margin: 20px;
+    height: 40px;
+    width: 100px;
 }
 
 .oneCost-label{
     float: center;
     margin: 30px;
 }
+
+.upper-row{
+    display: flex;
+    justify-content: center;
+}
+
+.left-inputs{
+    margin: 25px;
+}
+.right-inputs{
+    margin: 25px;
+}
+.lower-row{
+    display: flex;
+    justify-content: center;
+}   

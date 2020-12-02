@@ -3,6 +3,7 @@ using MoneyExchangerApp.Domain.Entities;
 using MoneyExchangerApp.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MoneyExchangerApp.Repositories.Repositories
@@ -19,6 +20,14 @@ namespace MoneyExchangerApp.Repositories.Repositories
         {
             _db.ExchangeEntities.Add(exchangeEntity);
             _db.SaveChanges();
+        }
+
+        public IQueryable<ExchangeEntity> GetExchangeEntitiesAsQuery() 
+        {
+            var query = _db.ExchangeEntities
+                                .OrderByDescending(x => x.Date)
+                                .AsQueryable();
+            return query;
         }
     }
 }

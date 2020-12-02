@@ -1,9 +1,11 @@
-﻿using MoneyExchangerApp.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MoneyExchangerApp.Domain.Entities;
 using MoneyExchangerApp.Domain.Models;
 using MoneyExchangerApp.Repositories.Interfaces;
 using MoneyExchangerApp.Services.Interfaces;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -26,6 +28,11 @@ namespace MoneyExchangerApp.Services.Services
             _exchangeRepository.SaveEntity(exchangeEntity);
 
             return exchangeResult;
+        }
+
+        public async Task<IEnumerable<ExchangeEntity>> GetExchangeEntitiesAsync() 
+        {
+            return await _exchangeRepository.GetExchangeEntitiesAsQuery().ToListAsync();
         }
 
         private ExchangeEntity BuildExchange(string fromCurrency, double fromAmount, string toCurrency, double toAmount)
