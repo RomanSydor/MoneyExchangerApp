@@ -25,7 +25,7 @@ namespace MoneyExchangerApp.Services.Services
             var exchangeResult = Math.Round(fromAmount * rate.Rates[toCurrency], 2);
 
             var exchangeEntity = BuildExchange(fromCurrency, fromAmount, toCurrency, exchangeResult);
-            _exchangeRepository.SaveEntity(exchangeEntity);
+            await Task.Run(() => _exchangeRepository.SaveEntityAsync(exchangeEntity));
 
             return exchangeResult;
         }

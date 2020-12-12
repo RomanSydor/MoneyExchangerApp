@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MoneyExchangerApp.Repositories.Repositories
 {
@@ -16,10 +17,10 @@ namespace MoneyExchangerApp.Repositories.Repositories
             _db = dataContext;
         }
 
-        public void SaveEntity(ExchangeEntity exchangeEntity)
+        public async void SaveEntityAsync(ExchangeEntity exchangeEntity)
         {
-            _db.ExchangeEntities.Add(exchangeEntity);
-            _db.SaveChanges();
+            await Task.Run(() => _db.ExchangeEntities.Add(exchangeEntity));
+            await Task.Run(() => _db.SaveChangesAsync());
         }
 
         public IQueryable<ExchangeEntity> GetExchangeEntitiesAsQuery() 

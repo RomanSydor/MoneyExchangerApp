@@ -8,7 +8,7 @@ namespace MoneyExchangerApp.Repositories.Interfaces
 {
     public interface IExchangeRepository
     {
-        void SaveEntity(ExchangeEntity exchangeEntity);
+        void SaveEntityAsync(ExchangeEntity exchangeEntity);
         IQueryable<ExchangeEntity> GetExchangeEntitiesAsQuery();
     }
 }
